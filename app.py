@@ -25,8 +25,8 @@ def save():
     nome = request.form['nome']         # <input name="nome" ...
     email = request.form['email']       # Sempre será uma string!
     telefone = request.form['telefone']
-    clientes.append({"id": uuid4(), "nome": nome, "email": email, "telefone": telefone})
-    return render_template('index.html', clientes=clientes)
+    commits.append({"id": uuid4(), "nome": nome, "email": email, "telefone": telefone})
+    return render_template('index.html', c=commits)
 
 # Trabalho Final da Disciplina:
 # Implementar o delete 
@@ -35,11 +35,45 @@ def save():
 
 @app.route('/delete/<id>')
 def delete(id):
-    return id
+    id = int(id)
+    for i,item  in enumerate(commits):
+        if item['id'] == id:
+            del commits[i]
+    return render_template('index.html', c=commits)
+
+
+
+
+
+
+
 
 @app.route('/update/<id>')
 def update(id):
-    return id
+    
+    return render_template('update.html')
+
+
+@app.route('/update2/<id>', methods=['GET'])
+def update2(id):
+    nome = request.form['nome']         # <input name="nome" ...
+    email = request.form['email']       # Sempre será uma string!
+    telefone = request.form['telefone']
+    
+    for i,item  in enumerate(commits):
+        if item['id'] == id:
+            update={'id': id , 'nome': nome, 'email': email, 'telefone':telefone}
+            commits[i] = update
+
+    return render_template('index.html', c=commits)
+
+
+
+
+
+
+
+
 
 app.run(debug=True)
 
