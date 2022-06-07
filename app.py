@@ -6,11 +6,15 @@ from uuid import uuid4
 
 app = Flask(__name__)
 
+
+
 commits = [
-    {'id': 1, 'nome': 'Fulano', 'email': 'fulano@email.com', 'telefone': '124123'},
-    {'id': 2, 'nome': 'Ciclano', 'email': 'ciclano@email.com', 'telefone': '1254124'},
-    {'id': 3, 'nome': 'Beltrano', 'email': 'beltrano@email.com', 'telefone': '112312'},
+    {'id': str(uuid4()), 'nome': 'Fulano', 'personagem': 'fulanoemail.com', 'filme': '124123'},
+    {'id': str(uuid4()), 'nome': 'Ciclano', 'personagem': 'ciclanoemail.com', 'filme': '1254124'},
+    {'id': str(uuid4()), 'nome': 'Beltrano', 'personagem': 'beltranoemail.com', 'filme': '112312'},
 ]
+
+
 
 @app.route('/')
 def index():
@@ -23,9 +27,9 @@ def create():
 @app.route('/save', methods=['POST'])
 def save():
     nome = request.form['nome']         # <input name="nome" ...
-    email = request.form['email']       # Sempre será uma string!
-    telefone = request.form['telefone']
-    commits.append({"id": uuid4(), "nome": nome, "email": email, "telefone": telefone})
+    personagem = request.form['personagem']       # Sempre será uma string!
+    filme = request.form['filme']
+    commits.append({"id": str(uuid4()), "nome": nome, "personagem": personagem, "filme": filme})
     return render_template('index.html', c=commits)
 
 # Trabalho Final da Disciplina:
@@ -35,7 +39,7 @@ def save():
 
 @app.route('/delete/<id>')
 def delete(id):
-    id = int(id)
+    
     for i,item  in enumerate(commits):
         if item['id'] == id:
             del commits[i]
@@ -54,7 +58,7 @@ def update(id):
     return render_template('update.html')
 
 
-@app.route('/update2/<id>', methods=['GET'])
+@app.route('/update2/<id>', methods=['PUT'])
 def update2(id):
     nome = request.form['nome']         # <input name="nome" ...
     email = request.form['email']       # Sempre será uma string!

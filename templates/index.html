@@ -13,9 +13,9 @@
 
         <table class="table table-hover">
         <tr>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Telefone</th>
+            <th>Ator/Atriz</th>
+            <th>Personagem</th>
+            <th>Filme/Serie</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
@@ -23,8 +23,8 @@
         {% for cliente in c %}        
             <tr>
                 <td>{{cliente['nome']}}</td>
-                <td>{{cliente['email']}}</td>
-                <td>{{cliente['teelfone']}}</td>
+                <td>{{cliente['personagem']}}</td>
+                <td>{{cliente['filme']}}</td>
                 <td><a href="/update/{{cliente['id']}}" class="btn btn-sm btn-outline-success">Editar</a></td>
                 <td><a href="/delete/{{cliente['id']}}" class="btn btn-sm btn-danger">Apagar</a></td>
             </tr>
