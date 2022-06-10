@@ -72,13 +72,14 @@ def update(id):
 
 @app.route('/update2/', methods=['POST'])
 def update2():
+    lista = request.form['lista']
     nome = request.form['ator']         # <input name="nome" ...
     personagem = request.form['personagem']       # Sempre será uma string!
     filme = request.form['filme']
-    lista = request.form['lista']
+    
     for i,item  in enumerate(atores):
-        if item['id'] == c['id']:
-            id = c['id']
+        if item['id'] == lista['id']:
+            id = lista['id']
             update={'id': id , 'nome': nome, 'personagem': personagem, 'filme':filme}
             atores[j] = update
    
