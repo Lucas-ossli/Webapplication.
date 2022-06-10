@@ -61,7 +61,7 @@ def delete(id):
 @app.route('/update/<id>')
 def update(id):
     ator=[]
-    for i,item  in enumerate(atores):
+    for item  in atores:
         if item['id'] == id:
             ator = item
            
@@ -69,15 +69,15 @@ def update(id):
 
 
 
-@app.route('/update2/', methods=['POST'])
-def update2():
+@app.route('/update2/2/<id>', methods=['POST'])
+def update2(id):
+    
     nome = request.form['ator']         # <input name="nome" ...
     personagem = request.form['personagem']       # Sempre será uma string!
     filme = request.form['filme']
     
     for i,item  in enumerate(atores):
-        if item['id'] == c['id']:
-            id = c['id']
+        if item['id'] == id:
             update={'id': id , 'nome': nome, 'personagem': personagem, 'filme':filme}
             atores[i] = update
    
