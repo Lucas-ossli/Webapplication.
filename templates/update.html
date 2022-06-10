@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>update</title>
+    
+   
 </head>
+       
 <body>
     <div class="container">
-        <form action="/update2/{{id}}" method="POST">
+        <form action="/update2/" method="POST">
             <div class="form-group">
-                <label>Nome</label>
-                <input type="text" name="nome" class="form-control"/>
+                <label>Ator</label>
+                <input type="text" name="ator" value='{{c['nome']}}' class="form-control"/>
             </div>
             <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" name="email" required="true"  class="form-control"/>
+                <label>Personagem</label>
+                <input type="text" name="personagem" required="true" value='{{c['personagem']}}' class="form-control"/>
             </div>
             <div class="form-group">
-                <label>Telefone</label>
-                <input type="text" name="telefone" class="form-control"/>
+                <label>Filme/Serie</label>
+                <input type="text" name="filme" value='{{c['filme']}}' class="form-control"/>
             </div>
             <button class="btn btn-primary" style="margin-top: 20px">Salvar</button>
         </form>

@@ -48,7 +48,6 @@ def save():
 
 @app.route('/delete/<id>')
 def delete(id):
-    
     for i,item  in enumerate(atores):
         if item['id'] == id:
             del atores[i]
@@ -59,26 +58,32 @@ def delete(id):
 
 
 
-
-
 @app.route('/update/<id>')
 def update(id):
-    
-    return render_template('update.html')
-
-
-@app.route('/update2/<id>', methods=['PUT'])
-def update2(id):
-    nome = request.form['nome']         # <input name="nome" ...
-    email = request.form['email']       # Sempre será uma string!
-    telefone = request.form['telefone']
-    
-    for i,item  in enumerate(commits):
+    ator=[]
+    for i,item  in enumerate(atores):
         if item['id'] == id:
-            update={'id': id , 'nome': nome, 'email': email, 'telefone':telefone}
-            commits[i] = update
+            ator = item
+            j = i
+    
+    return render_template('update.html', c = ator, i=j )
 
-    return render_template('index.html', c=commits)
+
+
+@app.route('/update2/', methods=['POST'])
+def update2():
+    nome = request.form['ator']         # <input name="nome" ...
+    personagem = request.form['personagem']       # Sempre será uma string!
+    filme = request.form['filme']
+    lista = request.form['lista']
+    for i,item  in enumerate(atores):
+        if item['id'] == c['id']:
+            id = c['id']
+            update={'id': id , 'nome': nome, 'personagem': personagem, 'filme':filme}
+            atores[j] = update
+   
+
+    return redirect('/')
 
 
 
