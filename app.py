@@ -64,24 +64,22 @@ def update(id):
     for i,item  in enumerate(atores):
         if item['id'] == id:
             ator = item
-            j = i
-    
-    return render_template('update.html', c = ator, i=j )
+           
+    return render_template('update.html', c = ator )
 
 
 
 @app.route('/update2/', methods=['POST'])
 def update2():
-    lista = request.form['lista']
     nome = request.form['ator']         # <input name="nome" ...
     personagem = request.form['personagem']       # Sempre será uma string!
     filme = request.form['filme']
     
     for i,item  in enumerate(atores):
-        if item['id'] == lista['id']:
-            id = lista['id']
+        if item['id'] == c['id']:
+            id = c['id']
             update={'id': id , 'nome': nome, 'personagem': personagem, 'filme':filme}
-            atores[j] = update
+            atores[i] = update
    
 
     return redirect('/')
