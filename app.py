@@ -7,15 +7,11 @@ import csv
 app = Flask(__name__)
 
 
-
-
 atores = []
-
 with open('Filmes.csv','rt') as file_in:
     leitor = csv.DictReader(file_in)
     for i in leitor:
         atores.append(dict(i))
-
 
 def saveDict():
     with open('Filmes.csv', 'wt') as file_out:
@@ -23,6 +19,7 @@ def saveDict():
         escritor.writeheader()
         escritor.writerows(atores)
 
+#---------------------------------------------------------------Inicio------------------------------------------------------------------------------------------------------------
 
 @app.route('/')
 def index():
@@ -41,10 +38,8 @@ def save():
     atores.append({"id": str(uuid4()), "nome": nome, "personagem": personagem, "filme": filme})
     return redirect('/')
 
-# Trabalho Final da Disciplina:
-# Implementar o delete 
-# Implementar o update (rota para mostrar os dados no form e outra para salvar os dados)
-# Salvar os dados, conforme forem sendo manipulados, em um arquivo CSV.
+#---------------------------------------------------------------Delete----------------------------------------------------------------------------------------------------------
+
 
 @app.route('/delete/<id>')
 def delete(id):
@@ -53,9 +48,7 @@ def delete(id):
             del atores[i]
     return redirect('/')
 
-
-
-
+#---------------------------------------------------------------Update-------------------------------------------------------------------------------------------------------
 
 
 @app.route('/update/<id>')
@@ -64,14 +57,12 @@ def update(id):
     for item  in atores:
         if item['id'] == id:
             ator = item
-           
+    
     return render_template('update.html', c = ator )
 
 
-
-@app.route('/update2/2/<id>', methods=['POST'])
+@app.route('/update2/<id>', methods=['POST'])
 def update2(id):
-    
     nome = request.form['ator']         # <input name="nome" ...
     personagem = request.form['personagem']       # Sempre será uma string!
     filme = request.form['filme']
@@ -80,19 +71,17 @@ def update2(id):
         if item['id'] == id:
             update={'id': id , 'nome': nome, 'personagem': personagem, 'filme':filme}
             atores[i] = update
-   
 
     return redirect('/')
 
 
-
-
-
-
-
-
-
 app.run(debug=True)
+
+
+# Trabalho Final da Disciplina:
+# Implementar o delete 
+# Implementar o update (rota para mostrar os dados no form e outra para salvar os dados)
+# Salvar os dados, conforme forem sendo manipulados, em um arquivo CSV.
 
 
 
