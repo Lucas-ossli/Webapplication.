@@ -20,13 +20,13 @@
             <th>&nbsp;</th>
         </tr>
 
-        {% for cliente in c %}        
+        {% for ator in c %}        
             <tr>
-                <td>{{cliente['nome']}}</td>
-                <td>{{cliente['personagem']}}</td>
-                <td>{{cliente['filme']}}</td>
-                <td><a href="/update/{{cliente['id']}}" class="btn btn-sm btn-outline-success">Editar</a></td>
-                <td><a href="/delete/{{cliente['id']}}" class="btn btn-sm btn-danger">Apagar</a></td>
+                <td>{{ator['nome']}}</td>
+                <td>{{ator['personagem']}}</td>
+                <td>{{ator['filme']}}</td>
+                <td><a href="/update/{{ator['id']}}" class="btn btn-sm btn-outline-success">Editar</a></td>
+                <td><a href="/delete/{{ator['id']}}" class="btn btn-sm btn-danger">Apagar</a></td>
             </tr>
         {% endfor %}
 

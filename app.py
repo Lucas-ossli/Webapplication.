@@ -1,24 +1,33 @@
 # Ao abrir o GitPod, execute:
 # pip install -r requirements.txt
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request , redirect
 from uuid import uuid4
-
+import csv
 app = Flask(__name__)
 
 
 
-commits = [
-    {'id': str(uuid4()), 'nome': 'Fulano', 'personagem': 'fulanoemail.com', 'filme': '124123'},
-    {'id': str(uuid4()), 'nome': 'Ciclano', 'personagem': 'ciclanoemail.com', 'filme': '1254124'},
-    {'id': str(uuid4()), 'nome': 'Beltrano', 'personagem': 'beltranoemail.com', 'filme': '112312'},
-]
 
+atores = []
+
+with open('Filmes.csv','rt') as file_in:
+    leitor = csv.DictReader(file_in)
+    for i in leitor:
+        atores.append(dict(i))
+
+
+def saveDict():
+    with open('Filmes.csv', 'wt') as file_out:
+        escritor = csv.DictWriter(file_out, ['id', 'nome' , 'personagem', 'filme'])
+        escritor.writeheader()
+        escritor.writerows(atores)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', c=commits)
+    saveDict()
+    return render_template('index.html', c=atores)
 
 @app.route('/create')
 def create():
@@ -29,8 +38,8 @@ def save():
     nome = request.form['nome']         # <input name="nome" ...
     personagem = request.form['personagem']       # Sempre será uma string!
     filme = request.form['filme']
-    commits.append({"id": str(uuid4()), "nome": nome, "personagem": personagem, "filme": filme})
-    return render_template('index.html', c=commits)
+    atores.append({"id": str(uuid4()), "nome": nome, "personagem": personagem, "filme": filme})
+    return redirect('/')
 
 # Trabalho Final da Disciplina:
 # Implementar o delete 
@@ -40,10 +49,10 @@ def save():
 @app.route('/delete/<id>')
 def delete(id):
     
-    for i,item  in enumerate(commits):
+    for i,item  in enumerate(atores):
         if item['id'] == id:
-            del commits[i]
-    return render_template('index.html', c=commits)
+            del atores[i]
+    return redirect('/')
 
 
 
